@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import usersRouter from './routes/usersRouter.js';
 import mongoose from 'mongoose';
-import galleryitemsRouter from './routes/galleryitemsRouter.js'
+import galleritemsRouter from './routes/galleryItemsRouter.js';
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 dotenv.config()
@@ -12,20 +12,20 @@ const app = express();
 app.use(bodyParser.json())
 
 app.use((req, res, next) => {
-    const token = req.header("Authorization")?.replace("Bearer ", "")
+    const token = req.header("Authorization") ?.replace("Bearer ", "")
     if (token != null) {
-        jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
-            if (decoded != null) {
+        jwt.verify(token,process.env.JWT_KEY,(err,decoded)=>{
+            if(decoded != null){
                 req.user = decoded //token detaill goes to decoded and decoded means user details//
                 console.log(decoded)
                 next()
-            } else {
+            }else{
                 next()
             }
 
         })
-
-    } else {
+       
+    }else{
         next()
     }
 
@@ -41,7 +41,7 @@ mongoose.connect(connectionString).then(() => {
 
 
 app.use("/api/users", usersRouter)
-app.use("/api/gallary", galleryitemsRouter)
+app.use("/api/gallary", galleritemsRouter)
 
 app.listen(5000, (req, res) => {
     console.log("Server is Running on Port 5000")

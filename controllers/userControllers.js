@@ -35,15 +35,6 @@ export function SaveUsers(req, res) {
 
 }
 
-
-export function updateUsers(req, res) {
-
-    User.findAndUpdate(
-        () => {
-
-        })
-
-}
 export function loginUser(req, res) {
 
     const credentials = req.body
