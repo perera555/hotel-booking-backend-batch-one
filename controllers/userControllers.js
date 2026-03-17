@@ -16,7 +16,7 @@ export function getUsers(req, res) {
 export function SaveUsers(req, res) {
     const user = req.body
     const password = req.body.password
-    const passwordHash = bcrypt.hashSync(password,10)
+    const passwordHash = bcrypt.hashSync(password, 10)
     user.password = passwordHash
 
 
@@ -77,7 +77,7 @@ export function loginUser(req, res) {
                 type: user.type
             }
 
-            const token = jwt.sign(userData, "secret", { expiresIn: "24h" })
+            const token = jwt.sign(userData,process.env.JWT_KEY , { expiresIn: "24h" })
 
             res.json({
                 message: "Login Successfully",
