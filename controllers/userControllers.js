@@ -85,3 +85,54 @@ export function loginUser(req, res) {
             })
         })
 } 
+export function updateUser(req, res) {
+    const userId = req.params.id
+    const updatedData = req.body
+
+    // If password is being updated → hash it
+    if (updatedData.password) {
+        updatedData.password = bcrypt.hashSync(updatedData.password, 10)
+    }
+
+    User.findByIdAndUpdate(userId, updatedData, { new: true })
+        .then((updatedUser) => {
+            if (!updatedUser) {
+                return res.status(404).json({
+                    message: "User Not Found"
+                })
+            }
+
+            res.json({
+                message: "User Updated Successfully",
+                user: updatedUser
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: "Update Failed",
+                error: err.message
+            })
+        })
+}
+export function deleteUser(req, res) {
+    const userId = req.params.id
+
+    User.findByIdAndDelete(userId)
+        .then((deletedUser) => {
+            if (!deletedUser) {
+                return res.status(404).json({
+                    message: "User Not Found"
+                })
+            }
+
+            res.json({
+                message: "User Deleted Successfully"
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: "Delete Failed",
+                error: err.message
+            })
+        })
+}
