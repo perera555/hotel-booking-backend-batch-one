@@ -1,4 +1,5 @@
-import Room from '../models/Room.js'; //Error
+
+import Rooms from "../models/room.js";
 import { isAdminValid } from "./userControllers.js";
 
 export function createRoom(req, res) {
@@ -8,7 +9,7 @@ export function createRoom(req, res) {
         })
         return
     }
-    const newRoom = new Room(req.body)
+    const newRoom = new Rooms(req.body)
     newRoom.save().then(
         (result) => {
             res.json({
@@ -32,7 +33,7 @@ export function deleteRoom(req, res) {
         return
     }
     const roomId = req.params.roomId
-    Room.findOneAndDelete({ roomId: roomId }).then
+    Rooms.findOneAndDelete({ roomId: roomId }).then
         (() => {
             res.json({
                 message: "Room deleted Successfully"
@@ -50,7 +51,7 @@ export function deleteRoom(req, res) {
 }
 export function findRoomById(req, res) {
     const roomId = req.params.roomId
-    Room.findOne({ roomId: roomId }).then(
+    Rooms.findOne({ roomId: roomId }).then(
         (result) => {
             if (result == null) {
                 res.status(404).json({
@@ -76,7 +77,7 @@ export function findRoomById(req, res) {
 }
 
 export function getRoom(req, res) {
-    Room.find().then((
+    Rooms.find().then((
         result) => {
         res.json({
             rooms: result
@@ -101,7 +102,7 @@ export function updateRoom(req,res){
 
     const roomId =req.params.roomId
 
-    Room.findOneAndUpdate({
+    Rooms.findOneAndUpdate({
         roomId : roomId
 
     },req.body
@@ -120,7 +121,7 @@ export function updateRoom(req,res){
 
 export function getRoomByCategory(req,res){
     const category = req.params.category
-    Room.find({category:category}).then(
+    Rooms.find({category:category}).then(
         (result)=>{
             res.json({
                 rooms:result
@@ -133,3 +134,5 @@ export function getRoomByCategory(req,res){
     })
 
 }
+
+
