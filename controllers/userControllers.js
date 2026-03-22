@@ -68,7 +68,7 @@ export function loginUser(req, res) {
                 type: user.type
             }
 
-            const token = jwt.sign(userData,process.env.JWT_KEY , { expiresIn: "24h" })
+            const token = jwt.sign(userData, process.env.JWT_KEY, { expiresIn: "24h" })
 
             res.json({
                 message: "Login Successfully",
@@ -84,7 +84,7 @@ export function loginUser(req, res) {
                 error: err.message
             })
         })
-} 
+}
 export function updateUser(req, res) {
     const userId = req.params.id
     const updatedData = req.body
@@ -135,4 +135,28 @@ export function deleteUser(req, res) {
                 error: err.message
             })
         })
+}
+
+export function isAdminValid(req) {
+
+    if (req.user == null) {
+        return false
+    }
+    if (req.user.type != "admin") {
+        return false
+
+    }
+    return true
+
+}
+
+export function iscustomerValid(req) {
+    if (req.user == null) {
+        return false
+    }
+    if (req.user.type != "customer") {
+        return false
+    }
+    return true
+
 }

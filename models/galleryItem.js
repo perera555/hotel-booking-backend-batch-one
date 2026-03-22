@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const galleryItemsSchema = mongoose.Schema({
+const galleryItemsSchema = new mongoose.Schema({
 
     name: {
         type: String,
