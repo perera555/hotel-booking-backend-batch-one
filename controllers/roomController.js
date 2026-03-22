@@ -1,4 +1,4 @@
-import Room from '../models/Room.js';
+import Room from '../models/Room.js'; //Error
 import { isAdminValid } from "./userControllers.js";
 
 export function createRoom(req, res) {
