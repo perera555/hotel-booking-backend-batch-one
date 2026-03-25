@@ -22,26 +22,26 @@ export function CreateBooking(req, res) {
                 end: req.body.end
             })
             newBooking.save().then(
-                (result)=>{
+                (result) => {
                     res.json({
-                        message:"Booking Created Successfully",
-                        result : result
+                        message: "Booking Created Successfully",
+                        result: result
                     })
 
-            }).catch(
-                (err)=>{
-                    res.json({
-                        message:"Booking Created Failed",
-                        error:err
+                }).catch(
+                    (err) => {
+                        res.json({
+                            message: "Booking Created Failed",
+                            error: err
+                        })
+
+
                     })
 
-
-            })
-
-        }).catch((err)=>{
+        }).catch((err) => {
             res.json({
-                message:"Booking Created Failed",
-                error:err
+                message: "Booking Created Failed",
+                error: err
             })
 
         })
