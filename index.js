@@ -8,11 +8,13 @@ import dotenv from "dotenv"
 import categoryRouter from './routes/categoryRouter.js';
 import roomRouter from './routes/roomRouter.js';
 import bookingRouter from './routes/bookingRouter.js';
+import cors from "cors"
 dotenv.config()
 
 
 const app = express();
-app.use(bodyParser.json())
+app.use(bodyParser.json()) 
+app.use(cors())
 
 app.use((req, res, next) => {
     const token = req.header("Authorization")?.replace("Bearer ", "")

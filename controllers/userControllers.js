@@ -2,17 +2,7 @@ import User from "../models/user.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-export function getUsers(req, res) {
-    User.find().then(
-        (userlist) => {
-            res.json({
-                list: userlist
-            })
 
-        }
-    ).catch()
-
-}
 export function SaveUsers(req, res) {
     const user = req.body
     const password = req.body.password
@@ -159,4 +149,19 @@ export function iscustomerValid(req) {
     }
     return true
 
+}
+
+export function getUser(req, res) {
+    const user = req.user;   
+
+    if (user == null) {
+        return res.status(401).json({
+            message: "User Not Found"
+        });
+    }
+
+    res.json({
+        message: "Found",
+        user: user
+    });
 }
